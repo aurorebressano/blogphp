@@ -6,7 +6,7 @@ if(isset($_GET["email"]) && isset($_GET['mdp']))
 {
     $email = $_GET["email"];
     $password = $_GET['mdp'];
-    require_once('../model/model_accounts.php');
+    require('../model/model_accounts.php');
 
     $auth = isAuth($email, $password);
     $_SESSION['auth'] = $auth;
