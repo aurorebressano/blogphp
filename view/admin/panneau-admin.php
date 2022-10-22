@@ -6,22 +6,15 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Clean Blog - Start Bootstrap Theme</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Liens -->
+        <?php require "../view/components/links.php"; ?>
     </head>
     <body>
         <!-- Navigation-->
-        <?php require "components/nav.php"; ?>
+        <?php require "../view/components/nav.php"; ?>
         <!-- Page Header-->
-        <?php 
-            $header_img = "background-image: url('assets/img/home-bg.jpg')";
-            require "components/header.php"; 
+        <?php
+            require "../view/components/header.php"; 
         ?>
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
@@ -30,8 +23,8 @@
                     <!-- Post preview-->
                     <div class="post-preview">
                         <a href="post.html">
-                            <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
-                            <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
+                            <h2 class="post-title">Panneau d'administration</h2>
+                            <!--<h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>-->
                         </a>
                         <p class="post-meta">
                             Posted by
@@ -86,7 +79,7 @@
             </div>
         </div>
         <!-- Footer-->
-        <?php require "components/footer.php"; ?>
+        <?php require "../view/components/footer.php"; ?>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
