@@ -36,12 +36,11 @@ function displayBlogpost()
     }
 
     // On récupère tout le contenu de la table Infos_paiement
-    $sqlQuery = 'SELECT * FROM blogpost';
+    $sqlQuery = 'SELECT * FROM blogpost ORDER BY date DESC';
     $blogpostsStatement = $mysqlClient->prepare($sqlQuery);
     $blogpostsStatement->execute();
     $blogposts = $blogpostsStatement->fetchAll();
     $arrBlogposts = array ();
-   
 
     // On affecte
     foreach ($blogposts as $blogpost) 

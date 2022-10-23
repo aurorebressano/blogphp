@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Clean Blog - Start Bootstrap Theme</title>
+        <title>Blogpost</title>
         <!-- Liens -->
         <?php require "../view/components/links.php"; ?>
     </head>
@@ -29,6 +29,56 @@
                 </div>
             </div>
         </article>
+        <!-- Comments -->
+        <div class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                        <h4>Laisser un commentaire (soumis à validation administrateur)</h4>
+                        <div class="my-5">
+                            <?php require "../view/components/comment_form.php"; ?>
+                        </div>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                        <h5>Commentaires</h5>
+                        <?php 
+                        if(gettype($comments) != "string")
+                        {
+                            foreach($comments as $comment)
+                            {?>
+                                <!-- Divider-->
+                                <hr class="my-4" />
+                                <div class="card">
+                                    <div class="card-header">
+                                        Pseudonyme: <?=$comment->pseudo;?>
+                                    </div>
+                                    <div class="card-body">
+                                        <blockquote class="blockquote mb-0">
+                                        <p><?= $comment->message;?></p>
+                                        <footer class="blockquote-footer">Rédigé le <cite title="Source Title"><?=$comment->date;?></cite></footer>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                        <?php }
+                        }
+                        else
+                        {?>
+                            <!-- Divider-->
+                            <hr class="my-4" />
+                            <div class="card">
+                                <div class="card-body">
+                                    <p><?= $comments;?></p>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
         <!-- Footer-->
         <?php require "../view/components/footer.php"; ?>
         <!-- Bootstrap core JS-->
