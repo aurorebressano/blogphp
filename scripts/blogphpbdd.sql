@@ -33,6 +33,7 @@ create table comment
 (id_comment INT AUTO_INCREMENT PRIMARY KEY,
 id_blogpost INT NOT NULL,
 pseudo VARCHAR(50) NOT NULL,
+email VARCHAR(50) NOT NULL,
 date DATETIME NOT NULL,
 message TEXT NOT NULL,
 statut ENUM('En attente de validation', 'Validé') DEFAULT 'En attente de validation' NOT NULL,

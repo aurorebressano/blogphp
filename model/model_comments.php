@@ -66,4 +66,32 @@ function findComments($idblogpost)
     return $arrComments;
 }
 
+function insertComment($idpost, $pseudo, $email, $message)
+{
+    try
+    {
+        // On se connecte à MySQL
+        $mysqlClient = new PDO('mysql:host=127.0.0.1;dbname=blogphpdb;charset=utf8', 'root', 'root');
+    }
+    catch(Exception $e)
+    {
+        // En cas d'erreur, on affiche un message et on arrête tout
+            die('Erreur : '.$e->getMessage());
+    }
+
+    $date = date("Y-m-d H:i:s");
+    echo $date;
+    echo $idpost, $pseudo, $email, $message;
+    // On récupère tout le contenu de la table 
+    $sqlQuery = 'INSERT INTO comment(id_blogpost, pseudo, email, date, message) VALUES(:id_blogpost, :pseudo, :email, :date, :message)';
+    $commentStatement = $mysqlClient->prepare($sqlQuery);
+    $commentStatement->execute([
+        'id_blogpost' => $idpost,
+        'pseudo' => $pseudo,
+        'email' => $email,
+        'date' => $date,
+        'message' => $message
+    ]);
+}
+
 ?>
