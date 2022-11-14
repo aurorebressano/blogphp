@@ -36,11 +36,21 @@ function findComments($idblogpost)
     }
 
     // On récupère tout le contenu de la table 
-    $sqlQuery = 'SELECT * FROM comment WHERE id_blogpost = :idblogpost AND statut="Validé" ORDER BY date DESC';
-    $commentStatement = $mysqlClient->prepare($sqlQuery);
-    $commentStatement->execute([
-        'idblogpost' => $idblogpost
-    ]);
+    if($idblogpost != null)
+    {
+        $sqlQuery = 'SELECT * FROM comment WHERE id_blogpost = :idblogpost AND statut="Validé" ORDER BY date DESC';
+        $commentStatement = $mysqlClient->prepare($sqlQuery);
+        $commentStatement->execute([
+            'idblogpost' => $idblogpost
+        ]);
+    }
+    else
+    {
+        $sqlQuery = 'SELECT * FROM comment WHERE statut="En attente de validation" ORDER BY date';
+        $commentStatement = $mysqlClient->prepare($sqlQuery);
+        $commentStatement->execute();
+    }
+
     $comments = $commentStatement->fetchAll();
 
     // On affecte
@@ -53,12 +63,12 @@ function findComments($idblogpost)
         foreach($comments as $comment)
         {
             $userComment = new Comment();
-            $userComment->id = $comment[0]['id_comment']; 
-            $userComment->blogpost = $comment[0]['id_blogpost']; 
-            $userComment->pseudo = $comment[0]['pseudo'];
-            $userComment->date = $comment[0]['date'];
-            $userComment->message = $comment[0]['message'];
-            $userComment->statut = $comment[0]['statut'];
+            $userComment->id = $comment['id_comment']; 
+            $userComment->blogpost = $comment['id_blogpost']; 
+            $userComment->pseudo = $comment['pseudo'];
+            $userComment->date = $comment['date'];
+            $userComment->message = $comment['message'];
+            $userComment->statut = $comment['statut'];
 
             array_push($arrComments, $userComment);
         }
@@ -94,4 +104,82 @@ function insertComment($idpost, $pseudo, $email, $message)
     ]);
 }
 
+function findOneCom($idCom)
+{
+    try
+    {
+        // On se connecte à MySQL
+        $mysqlClient = new PDO('mysql:host=127.0.0.1;dbname=blogphpdb;charset=utf8', 'root', 'root');
+    }
+    catch(Exception $e)
+    {
+        // En cas d'erreur, on affiche un message et on arrête tout
+            die('Erreur : '.$e->getMessage());
+    }
+
+    $sqlQuery = 'SELECT * FROM comment WHERE id_comment = :id_comment';
+    $commentStatement = $mysqlClient->prepare($sqlQuery);
+    $commentStatement->execute([
+        'id_comment' => $idCom
+    ]);
+
+    $comments = $commentStatement->fetchAll();
+
+    var_dump($comments);
+
+    // On affecte
+
+    $userComment = null;
+
+    if(sizeof($comments) > 0)
+    {
+        $userComment = new Comment();
+        $userComment->id = $comment[0]['id_comment']; 
+        $userComment->blogpost = $comment[0]['id_blogpost']; 
+        $userComment->pseudo = $comment[0]['pseudo'];
+        $userComment->date = $comment[0]['date'];
+        $userComment->message = $comment[0]['message'];
+        $userComment->statut = $comment[0]['statut'];
+    }
+    return $userComment;
+}
+
+
+function validateComs($idCom)
+{
+    try
+    {
+        // On se connecte à MySQL
+        $mysqlClient = new PDO('mysql:host=127.0.0.1;dbname=blogphpdb;charset=utf8', 'root', 'root');
+    }
+    catch(Exception $e)
+    {
+        // En cas d'erreur, on affiche un message et on arrête tout
+            die('Erreur : '.$e->getMessage());
+    }
+    $sqlQuery = 'UPDATE `comment` SET statut = "Validé" WHERE id_comment = :id_comment';
+    $commentStatement = $mysqlClient->prepare($sqlQuery);
+    $commentStatement->execute([
+        'id_comment' => $idCom
+    ]);
+}
+
+function deleteOneCom($idCom)
+{
+    try
+    {
+        // On se connecte à MySQL
+        $mysqlClient = new PDO('mysql:host=127.0.0.1;dbname=blogphpdb;charset=utf8', 'root', 'root');
+    }
+    catch(Exception $e)
+    {
+        // En cas d'erreur, on affiche un message et on arrête tout
+            die('Erreur : '.$e->getMessage());
+    }
+    $sqlQuery = 'DELETE FROM `comment` WHERE id_comment = :id_comment';
+    $commentStatement = $mysqlClient->prepare($sqlQuery);
+    $commentStatement->execute([
+        'id_comment' => $idCom
+    ]);
+}
 ?>

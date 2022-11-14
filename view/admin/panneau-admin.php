@@ -17,28 +17,34 @@
             require "../view/components/header.php"; 
         ?>
         <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <!-- Post preview-->
-                    <ul class="nav justify-content-center">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Commentaires à valider</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Nouveau post</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Demandes d'inscription</a>
-                        </li>
-                        <!-- Sur chaque blogpost doit apparaitre pour les admin "edit" et "delete" ! -->
-                    </ul>
-                    <!-- Divider-->
-                    <!-- <hr class="my-4" /> -->
-                    <br/>
+        <div class="container justify-content-center">
+            <!-- Admin nav -->
+            <form action="admin.php" method="get" class="nav justify-content-center mt-0 mb-0">
+                <button class="btn btn-link nav-item mt-0 mb-0" name ="commentvalid" type="submit">
+                    <p class="mt-0 mb-0">Commentaires à valider</p>
+                </button>
+                <button class="btn btn-link nav-item mt-0 mb-0" name="newpost" type="submit">
+                    <p class="mt-0 mb-0">Nouveau post</p>
+                </button>
+                <button class="btn btn-link nav-item mt-0 mb-0" name="register" type="submit">
+                    <p class="mt-0 mb-0">Demandes d'inscription</p>
+                </button>
+            </form>
+        </div>
+        <!-- Divider-->
+        <hr class="my-4" />
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="my-5">
+                            <!-- Appel du composant à afficher -->
+                            <?php require($pageToDisplay); ?>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
         <!-- Footer-->
         <?php require "../view/components/footer.php"; ?>
         <!-- Bootstrap core JS-->

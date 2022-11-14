@@ -45,6 +45,20 @@ $path = AdminOrLogin($auth)[0];
 $page_title = AdminOrLogin($auth)[1];
 $header_img = AdminOrLogin($auth)[2];
 
+// Demande d'affichage de gestion admin spécifique
+if(isset($_GET["commentvalid"]) || isset($_GET['validate']) || isset($_GET['delete']))
+    $pageToDisplay = "checkcoms.php";
+
+if(isset($_GET["newpost"]))
+    $pageToDisplay = "../view/admin/components/new_post_form.php";
+
+if(isset($_GET['register']))
+    $pageToDisplay = "../view/admin/components/register.php";
+
+if(!isset($_GET["commentvalid"]) && !isset($_GET['newpost']) && !isset($_GET['register']))
+    $pageToDisplay = "../view/admin/components/accueil_admin.php";
+
+    echo $pageToDisplay;
 require($path);
 
 ?>

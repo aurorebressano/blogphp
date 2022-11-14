@@ -77,8 +77,6 @@
                 </div>
             </div>
         </div>
-        
-
         <!-- Footer-->
         <?php require "../view/components/footer.php"; ?>
         <!-- Bootstrap core JS-->
