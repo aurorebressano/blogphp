@@ -7,8 +7,10 @@ require_once('model/model_comments.php');
 
 if(isset($_GET["id_blogpost"]))
 {
-    $post = getTheOne($_GET["id_blogpost"]);
-    $comments = findComments($_GET["id_blogpost"]);
+    $post = new Blogpost();
+    $comments = new Comment();
+    $post = $post->getTheOne($_GET["id_blogpost"]);
+    $comments = $comments->findComments($_GET["id_blogpost"]);
     if($comments == null)
         $comments = "Aucun commentaire pour l'instant";
 

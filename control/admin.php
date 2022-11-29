@@ -8,7 +8,8 @@ if(isset($_GET["email"]) && isset($_GET['mdp']))
     $password = $_GET['mdp'];
     require('../model/model_accounts.php');
 
-    $auth = isAuth($email, $password);
+    $auth = new Account;
+    $auth = $auth->isAuth($email, $password);
     $_SESSION['auth'] = $auth;
 }
 else
@@ -58,7 +59,6 @@ if(isset($_GET['register']))
 if(!isset($_GET["commentvalid"]) && !isset($_GET['newpost']) && !isset($_GET['register']))
     $pageToDisplay = "../view/admin/components/accueil_admin.php";
 
-    echo $pageToDisplay;
 require($path);
 
 ?>

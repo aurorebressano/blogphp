@@ -5,7 +5,7 @@ if(session_status() !== PHP_SESSION_ACTIVE)
 
 $page_title = "Contact";
 
-require('../view/view_contact.php');
+require('view/view_contact.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {

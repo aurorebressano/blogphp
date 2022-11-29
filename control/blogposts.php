@@ -4,7 +4,8 @@ if(session_status() !== PHP_SESSION_ACTIVE)
 
 require_once('model/model_blogpost.php');
 
-$posts = displayBlogpost();
+$posts = new Blogpost();
+$posts = $posts->displayBlogpost();
 $page_title = "Bienvenue sur mon blog !";
 
 require('view/view_blogposts.php');
