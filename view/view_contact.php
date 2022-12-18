@@ -15,7 +15,7 @@
         <!-- Page Header-->
         <?php 
             $header_img = "background-image: url('view/assets/img/contact-bg.jpg')";
-            require "view/components/header.php"; 
+            require "view/components/header.php";
         ?>
         <!-- Main Content-->
         <main class="mb-4">
@@ -24,7 +24,7 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <p>Une petite question ?</p>
                         <div class="my-5">
-                            <?php require "view/components/contact_form.php"; ?>
+                        <?php require "view/components/contact_form.php"; ?>
                         </div>
                     </div>
                 </div>
