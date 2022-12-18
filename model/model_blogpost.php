@@ -5,23 +5,26 @@ require_once("Connect.php");
 
 class Blogpost 
 {
-    public function __construct(array $arguments = array()) {
-        if (!empty($arguments)) {
-            foreach ($arguments as $property => $argument) {
-                $this->{$property} = $argument;
-            }
-        }
-    }
+    private $id;
+    private $title;
+    private $author;
+    private $date;
+    private $chapo;
+    private $content;
+    private $imgheader;
+    private $imgsecondary;
 
-    public function __call($method, $arguments) {
-        $arguments = array_merge(array("stdObject" => $this), $arguments); // Note: method argument 0 will always referred to the main class ($this).
-        if (isset($this->{$method}) && is_callable($this->{$method})) {
-            return call_user_func_array($this->{$method}, $arguments);
-        } else {
-            throw new Exception("Fatal error: Call to undefined method Blogpost::{$method}()");
-        }
-    }
-
+    /*public function __construct($id, $title, $author, $date, $chapo, $content, $imgheader, $imgsecondary)
+    {
+        $this->id = $id;
+        $this->title = $title;
+        $this->author = $author;
+        $this->date = $date;
+        $this->chapo= $chapo;
+        $this->content = $content;
+        $this->imgheader = $imgheader;
+        $this->imgsecondary = $imgsecondary;
+    }*/
     // CONNEXION BDD
 
     function displayBlogpost()

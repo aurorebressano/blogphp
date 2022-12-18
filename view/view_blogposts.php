@@ -23,24 +23,32 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
                     <?php 
-                    foreach($posts as $post)
-                    {?>
-                        <div class="post-preview">
-                            <form action="index.php?=blogposts?=blogpost" method="get">
-                                <button class="btn btn-link" name= "id_blogpost" value = "<?=$post->id?>" type="submit">
-                                        <h2 class="post-title"><?= $post->title ?></h2>
-                                        <p><?= $post->chapo ?></p>
-                                </button>
-                            </form>
-                            <p class="post-meta">
-                                Posted by
-                                <?= $post->author ?>
-                                on <?= $post->date ?>
-                            </p>
-                        </div>
-                        <!-- Divider-->
-                        <hr class="my-4" />
-                <?php } ?>
+
+                    try
+                    {
+                        foreach($posts as $post)
+                        {?>
+                            <div class="post-preview">
+                                <form action="index.php?=blogposts?=blogpost" method="get">
+                                    <button class="btn btn-link" name= "id_blogpost" value = "<?=$post->id?>" type="submit">
+                                            <h2 class="post-title"><?= $post->title ?></h2>
+                                            <p><?= $post->chapo ?></p>
+                                    </button>
+                                </form>
+                                <p class="post-meta">
+                                    Posted by
+                                    <?= $post->author ?>
+                                    on <?= $post->date ?>
+                                </p>
+                            </div>
+                            <hr class="my-4" />
+                    <?php }  
+                    }
+                    catch(Error $e)
+                    {
+                        echo 'Aucun blogpost à afficher';
+                    }
+                    ?>
                     <!-- Pager-->
                     <!-- <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div> -->
                 </div>
