@@ -19,7 +19,7 @@
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="<?= "$protocol://$host/index.php?action=blogposts"?>">Blogposts</a></li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="<?= "$protocol://$host/index.php?action=contact"?>">Contact</a></li>
                 <?php 
-                if(isset($_SESSION['auth']) && $_SESSION['auth'] != null )
+                if (isset($_SESSION['auth']) && $_SESSION['auth'] != null )
                 {
                     echo '<li class="nav-item">
                     <a class="nav-link px-lg-3 py-3 py-lg-4" href="disconnect.php">

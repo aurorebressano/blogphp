@@ -44,7 +44,7 @@
                         <hr class="my-4" />
                         <h5>Commentaires</h5>
                         <?php 
-                        if(gettype($comments) != "string")
+                        if (gettype($comments) != "string")
                         {
                             foreach($comments as $comment)
                             {?>

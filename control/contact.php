@@ -1,6 +1,6 @@
 <?php
 
-if(session_status() !== PHP_SESSION_ACTIVE)
+if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
 
 $root = $_SERVER['WEB_ROOT'] = str_replace($_SERVER['SCRIPT_NAME'],'',$_SERVER['SCRIPT_FILENAME']); 
@@ -19,20 +19,20 @@ require_once "vendor/symfony/mime/Email.php";
 require_once "vendor/symfony/mailer/Mailer.php";
 require "view/view_contact.php";
 
-if($_SERVER['REQUEST_METHOD'] == 'POST')
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    /*if(!isset($_POST['recaptcha-response']))
+    /*if (!isset($_POST['recaptcha-response']))
     {
         // header('Location: index.php');
         echo "empty(['recaptcha-response']) !";
     }
-    if(isset($_POST['recaptcha-response']))
+    if (isset($_POST['recaptcha-response']))
     {
         //On prépare l'URL
         $url = "https://www.google.com/recaptcha/api/siteverify?secret=6LfwWUgeAAAAABqDzSOXR6voI7V4nVRndb4Tul7a&response=". $_POST['recaptcha-response'];
 
         // On vérifie si curl est installé
-        if(function_exists('curl_version'))
+        if (function_exists('curl_version'))
         {
             echo "curl version exists";
             $curl = curl_init($url);
@@ -51,7 +51,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         }
 
         // On vérifie qu'on a une réponse
-        if(empty($response) || is_null($response))
+        if (empty($response) || is_null($response))
         {
             header('Location: index.php');
         }
@@ -60,9 +60,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             $data = json_decode($response);
             echo $data;
         
-            if($data->success)
+            if ($data->success)
             {
-                if(isset($_POST['email']) && !empty($_POST['email']) 
+                if (isset($_POST['email']) && !empty($_POST['email']) 
                 && isset($_POST['message']) && !empty($_POST['message']))
                 {
                     // Prepare and send email
@@ -73,7 +73,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
     $email= new Email();
 
-    if(isset($_POST['email']) && !empty($_POST['email']) 
+    if (isset($_POST['email']) && !empty($_POST['email']) 
     && isset($_POST['message']) && !empty($_POST['message']))
     {
         // Create a Transport object

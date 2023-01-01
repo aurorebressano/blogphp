@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row"> 
             <?php 
-            if($commentsToCheck != null && gettype($commentsToCheck) != "string" && sizeof($commentsToCheck) > 0)
+            if ($commentsToCheck != null && gettype($commentsToCheck) != "string" && sizeof($commentsToCheck) > 0)
             {  
                 foreach($commentsToCheck as $comment)
                 {?>

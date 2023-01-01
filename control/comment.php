@@ -1,14 +1,14 @@
 <?php 
-if(session_status() !== PHP_SESSION_ACTIVE)
+if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
 
-if( isset($_POST["pseudo"]) && isset($_POST["email"]) && isset($_POST["comment"]) && isset($_POST["idpost"]))
+if ( isset($_POST["pseudo"]) && isset($_POST["email"]) && isset($_POST["comment"]) && isset($_POST["idpost"]))
 {
-    require_once('../model/model_comments.php');
+    require_once('../model/Comment.php');
     $insert = new Comment();
     $insert->insertComment($_POST["idpost"], $_POST["pseudo"], $_POST["email"], $_POST["comment"]);
 }
 
-require("blogpost.php");
+require "blogpost.php";
 
 ?>

@@ -1,4 +1,5 @@
 <?php 
+namespace Blogphp\Model;
 
     class Route 
     {
