@@ -1,8 +1,6 @@
 <?php 
 namespace App\Model;
 
-require_once 'vendor/autoload.php';
-
 class Route 
 {
     private $url;
@@ -28,6 +26,7 @@ class Route
 
     public function calledController()
     {
+        $this->controllerRedirect = $_SERVER['DOCUMENT_ROOT'] . $this->controllerRedirect;
         return $this->controllerRedirect;
     }
 

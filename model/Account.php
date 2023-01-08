@@ -5,21 +5,27 @@ use App\Model\Connect;
 
 class Account 
 {
-    public function __construct(array $arguments = array()) {
-        if (!empty($arguments)) {
-            foreach ($arguments as $property => $argument) {
-                $this->{$property} = $argument;
-            }
-        }
+    private $id;
+    private $type;
+    private $nom;
+    private $prenom;
+    private $email;
+    private $mdp;
+    private $statut;
+
+    public function __construct(int $id = null, string $type = null, string $nom = null, string $prenom = null, string $email = null, string $mdp = null, string $statut = null) {
+       $this->id = $id;
+       $this->type = $type;
+       $this->nom = $nom;
+       $this->prenom = $prenom;
+       $this->email = $email;
+       $this->mdp = $mdp;
+       $this->statut = $statut;
     }
 
-    public function __call($method, $arguments) {
-        $arguments = array_merge(array("stdObject" => $this), $arguments); // Note: method argument 0 will always referred to the main class ($this).
-        if (isset($this->{$method}) && is_callable($this->{$method})) {
-            return call_user_func_array($this->{$method}, $arguments);
-        } else {
-            throw new Exception("Fatal error: Call to undefined method Blogpost::{$method}()");
-        }
+    public function __call(string $email, array $mdp)
+    {
+        return $this;
     }
 
     // CONNEXION BDD
@@ -55,9 +61,11 @@ class Account
         return $userAccount;
     }
 
-    function isAuth($email, $password)
+    public static function isAuth($email, $password)
     {
-        $find = $this->findUsers($email, $password);
+        $find = new self();
+        $find->findUsers($email, $password);
+
         if ($find == null)
             $users = false;
         else

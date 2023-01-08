@@ -16,8 +16,8 @@ require "vendor/symfony/mailer/event/MessageEvent.php";
 require "vendor/symfony/mailer/Exception/TransportExceptionInterface.php";
 require "vendor/symfony/mailer/Messenger/SendEmailMessage.php";
 require "vendor/symfony/mailer/Transport/TransportInterface.php";
-//require "../vendor/symfony/mailer/Messenger/Exception\HandlerFailedException;
-//require "../vendor/symfony/mailer/Messenger/MessageBusInterface;
+//require "vendor/symfony/mailer/Messenger/Exception\HandlerFailedException;
+//require "vendor/symfony/mailer/Messenger/MessageBusInterface;
 //require "vendor/symfony/mime/RawMessage.php";
 
 /**

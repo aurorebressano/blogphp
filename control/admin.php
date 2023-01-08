@@ -13,10 +13,8 @@ if (isset($_GET["email"]) && isset($_GET['mdp']))
 {
     $email = $_GET["email"];
     $password = $_GET['mdp'];
-    //require('../model/Account.php');
 
-    $auth = new Account();
-    $auth = $auth->isAuth($email, $password);
+    $auth = Account::isAuth($email, $password);
     $_SESSION['auth'] = $auth;
 }
 else
