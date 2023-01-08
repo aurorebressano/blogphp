@@ -1,4 +1,4 @@
-<form id="contactForm" action="contact.php" method="post">
+<form id="contactForm" action="<?= "$protocol://$host/index.php?action=contact"?>" method="post">
     <div class="form-floating">
         <input class="form-control" id="name" type="text" placeholder="Nom, prénom..." name="name" required />
         <label for="name">Nom, prénom:</label>

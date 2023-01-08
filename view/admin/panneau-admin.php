@@ -39,7 +39,7 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="my-5">
                             <!-- Appel du composant à afficher -->
-                            <?php require($pageToDisplay); ?>
+                            <?php require $pageToDisplay; ?>
                         </div>
                     </div>
                 </div>

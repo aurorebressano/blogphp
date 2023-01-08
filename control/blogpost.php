@@ -1,22 +1,28 @@
 <?php
-if(session_status() !== PHP_SESSION_ACTIVE)
+namespace App\Control\Blogpost;
+
+use App\Model\Blogpost;
+use App\Model\Comment;
+
+require_once 'vendor/autoload.php';
+
+if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
 
-require_once('../model/model_blogpost.php');
-require_once('../model/model_comments.php');
-
-if(isset($_GET["id_blogpost"]))
+if (isset($_GET["id_blogpost"]))
 {
-    $post = getTheOne($_GET["id_blogpost"]);
-    $comments = findComments($_GET["id_blogpost"]);
-    if($comments == null)
+    $post = new Blogpost();
+    $comments = new Comment();
+    $post = $post->getTheOne($_GET["id_blogpost"]);
+    $comments = $comments->findComments($_GET["id_blogpost"]);
+    if ($comments == null)
         $comments = "Aucun commentaire pour l'instant";
 
-    if(gettype($post) == "string")
-        require('blogposts.php');
+    if (gettype($post) == "string")
+        require 'blogposts.php';
     else
-        require('../view/view_blogpost.php');
+        require 'view/view_blogpost.php';
 }
 else
-    require('blogposts.php');
+    require 'blogposts.php' ;
 ?>

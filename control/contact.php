@@ -1,77 +1,60 @@
 <?php
+namespace App\Control;
 
-if(session_status() !== PHP_SESSION_ACTIVE)
+require_once 'vendor/autoload.php';
+
+if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
+
+$root = $_SERVER['WEB_ROOT'] = str_replace($_SERVER['SCRIPT_NAME'],'',$_SERVER['SCRIPT_FILENAME']); 
+$host = $_SERVER['HTTP_HOST'];
+$protocol=$_SERVER['PROTOCOL'] = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https' : 'http';
 
 $page_title = "Contact";
 
-require('../view/view_contact.php');
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
-if($_SERVER['REQUEST_METHOD'] == 'POST')
+require "view/view_contact.php";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    if(!isset($_POST['recaptcha-response']))
-    {
-        // header('Location: index.php');
-        echo "empty(['recaptcha-response']) !";
-    }
-    if(isset($_POST['recaptcha-response']))
-    {
-        //On prépare l'URL
-        $url = "https://www.google.com/recaptcha/api/siteverify?secret=6LfwWUgeAAAAABqDzSOXR6voI7V4nVRndb4Tul7a&response=". $_POST['recaptcha-response'];
+    $email= new Email();
 
-        // On vérifie si curl est installé
-        if(function_exists('curl_version'))
-        {
-            echo "curl version exists";
-            $curl = curl_init($url);
-            curl_setopt($curl, CURLOPT_HEADER, false);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_TIMEOUT, 1);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            $response = curl_exec($curl);
-            echo "on sort des curl";
-        }
-        else
-        {
-            // On utilisera file_get_contents
-            $response = file_get_contents($url);
-            echo "curl n'est pas en place";
-        }
+    if (isset($_POST['email']) && !empty($_POST['email']) 
+    && isset($_POST['message']) && !empty($_POST['message']))
+    {
+        // Create a Transport object
 
-        // On vérifie qu'on a une réponse
-        if(empty($response) || is_null($response))
-        {
-            header('Location: index.php');
-        }
-        else
-        {
-            $data = json_decode($response);
-            echo $data;
+        $emailSender = strip_tags($_POST['email']);
+        $message = htmlspecialchars($_POST['message']);
+        $transport = Transport::fromDsn('smtp://f7bc876e51d7a6:bfde5980ea1da5@smtp.mailtrap.io:2525?encryption=tls&auth_mode=login');
         
-            if($data->success)
-            {
-                if(isset($_POST['email']) && !empty($_POST['email']) 
-                && isset($_POST['message']) && !empty($_POST['message']))
-                {
-                    $email = strip_tags($_POST['email']);
-                    $message = htmlspecialchars($_POST['message']);
-                    $additional_headers = array(
-                        'From' => $email,
-                        'Reply-To' => $email,
-                        'X-Mailer' => 'PHP/' . phpversion(),
-                        'Content-Type' => 'text/html; charset="UTF-8'
-                    );
+        // Create a Mailer object
+        $mailer = new Mailer($transport); 
 
-                    echo "Coucou !  Voilà ton mail: " . $email . " et voilà ton message : ". $message ;
-
-                    mail(
-                        'aurorebressano@gmail.com',
-                        'Mail provenant du blog !',
-                        $message,
-                        $additional_headers
-                    );
-                }
-            }
+        // Create an Email object
+        $email = (new Email());
+        
+        // Set the "From address"
+        $email->from($emailSender);
+        
+        // Set the "From address"
+        $email->to($emailSender);
+        
+        // Set a "subject"
+        $email->subject('Message démo !!');
+        
+        // Set the plain-text "Body"
+        $email->text($message);
+        
+        // Send the message
+        try {
+            $mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+            echo "Echec d'envoi du message";
         }
     }
 }

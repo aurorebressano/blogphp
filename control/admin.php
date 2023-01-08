@@ -1,14 +1,20 @@
 <?php
-if(session_status() !== PHP_SESSION_ACTIVE)
+namespace App\Control\Admin;
+
+if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
 
-if(isset($_GET["email"]) && isset($_GET['mdp']))
+use App\Model\Blogpost;
+use App\Model\Account;
+
+require_once '../vendor/autoload.php';
+
+if (isset($_GET["email"]) && isset($_GET['mdp']))
 {
     $email = $_GET["email"];
     $password = $_GET['mdp'];
-    require('../model/model_accounts.php');
 
-    $auth = isAuth($email, $password);
+    $auth = Account::isAuth($email, $password);
     $_SESSION['auth'] = $auth;
 }
 else
@@ -16,14 +22,14 @@ else
     $auth = false;
 }
 
-if(isset($_SESSION['auth']))
+if (isset($_SESSION['auth']))
 {
     $auth = $_SESSION['auth'];
 }
 
 function AdminOrLogin($auth)
 {
-    if(isset($auth) && $auth != false)
+    if (isset($auth) && $auth != false)
     {
         $path = $path = '../view/admin/panneau-admin.php';
         $page_title = "Panneau d'administration";
@@ -46,19 +52,18 @@ $page_title = AdminOrLogin($auth)[1];
 $header_img = AdminOrLogin($auth)[2];
 
 // Demande d'affichage de gestion admin spécifique
-if(isset($_GET["commentvalid"]) || isset($_GET['validate']) || isset($_GET['delete']))
+if (isset($_GET["commentvalid"]) || isset($_GET['validate']) || isset($_GET['delete']))
     $pageToDisplay = "checkcoms.php";
 
-if(isset($_GET["newpost"]))
+if (isset($_GET["newpost"]))
     $pageToDisplay = "../view/admin/components/new_post_form.php";
 
-if(isset($_GET['register']))
+if (isset($_GET['register']))
     $pageToDisplay = "../view/admin/components/register.php";
 
-if(!isset($_GET["commentvalid"]) && !isset($_GET['newpost']) && !isset($_GET['register']))
+if (!isset($_GET["commentvalid"]) && !isset($_GET['newpost']) && !isset($_GET['register']))
     $pageToDisplay = "../view/admin/components/accueil_admin.php";
 
-    echo $pageToDisplay;
-require($path);
+require $path;
 
 ?>
