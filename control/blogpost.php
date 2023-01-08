@@ -1,14 +1,13 @@
 <?php
-namespace Blogphp\Control\Blogpost;
+namespace App\Control\Blogpost;
 
-use Blogphp\Model\Blogpost;
-use Blogphp\Model\Comment;
+use App\Model\Blogpost;
+use App\Model\Comment;
+
+require_once 'vendor/autoload.php';
 
 if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
-
-//require_once('model/Blogpost.php');
-//require_once('model/Comment.php');
 
 if (isset($_GET["id_blogpost"]))
 {

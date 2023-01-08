@@ -11,7 +11,6 @@
 
 namespace Symfony\Component\Mime\Part\Multipart;
 
-require "vendor/symfony/mime/Part/AbstractMultipartPart.php";
 use Symfony\Component\Mime\Part\AbstractMultipartPart;
 
 /**

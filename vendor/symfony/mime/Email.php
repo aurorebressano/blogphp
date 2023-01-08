@@ -19,7 +19,6 @@ use Symfony\Component\Mime\Part\Multipart\AlternativePart;
 use Symfony\Component\Mime\Part\Multipart\MixedPart;
 use Symfony\Component\Mime\Part\Multipart\RelatedPart;
 use Symfony\Component\Mime\Part\TextPart;
-use Symfony\Component\Mime\Message;
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>

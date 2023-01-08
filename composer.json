@@ -9,7 +9,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Blogphp\\": "."
+            "App\\": "/"
         }
-    }
+    },
+    "name": "coopernet/testautoload",
+    "authors": [
+        {
+            "name": "moi",
+            "email": "moi@coopernet.fr"
+        }
+    ]
 }

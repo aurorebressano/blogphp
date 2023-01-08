@@ -1,14 +1,11 @@
 <?php
-namespace Blogphp\Control\Blogposts;
+namespace App\Control;
+require_once 'vendor/autoload.php';
 
-use Blogphp\Model\Blogpost;
-
-//class Blogposts{}
+use App\Model\Blogpost;
 
 if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
-
-//require_once('model/Blogpost.php');
 
 $posts = new Blogpost();
 $posts = $posts->displayBlogpost();

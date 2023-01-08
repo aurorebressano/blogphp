@@ -1,5 +1,7 @@
 <?php
-namespace Model;
+namespace App\Model;
+
+use \PDO;
 
 class Connect
 {

@@ -1,10 +1,12 @@
 <!-- Commentaires à valider -->
 <?php
 
+use App\Model\Comment;
+
 if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
 
-require_once("../model/Comment.php");
+require_once '../vendor/autoload.php';
 
 if (isset($_SESSION['auth']))
 {

@@ -28,8 +28,8 @@ use Twig\Profiler\Profile;
  */
 class TwigDataCollector extends DataCollector implements LateDataCollectorInterface
 {
-    private $profile;
-    private $twig;
+    private Profile $profile;
+    private ?Environment $twig;
     private array $computed;
 
     public function __construct(Profile $profile, Environment $twig = null)
@@ -38,16 +38,10 @@ class TwigDataCollector extends DataCollector implements LateDataCollectorInterf
         $this->twig = $twig;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reset()
     {
         $this->profile->reset();
@@ -55,9 +49,6 @@ class TwigDataCollector extends DataCollector implements LateDataCollectorInterf
         $this->data = [];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function lateCollect()
     {
         $this->data['profile'] = serialize($this->profile);
@@ -71,7 +62,7 @@ class TwigDataCollector extends DataCollector implements LateDataCollectorInterf
             if ($profile->isTemplate()) {
                 try {
                     $template = $this->twig->load($name = $profile->getName());
-                } catch (LoaderError $e) {
+                } catch (LoaderError) {
                     $template = null;
                 }
 
@@ -140,7 +131,7 @@ class TwigDataCollector extends DataCollector implements LateDataCollectorInterf
 
     public function getProfile()
     {
-        return $this->profile ??= unserialize($this->data['profile'], ['allowed_classes' => ['Twig_Profiler_Profile', 'Twig\Profiler\Profile']]);
+        return $this->profile ??= unserialize($this->data['profile'], ['allowed_classes' => ['Twig_Profiler_Profile', Profile::class]]);
     }
 
     private function getComputedData(string $index)
@@ -187,9 +178,6 @@ class TwigDataCollector extends DataCollector implements LateDataCollectorInterf
         return $data;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'twig';

@@ -24,8 +24,8 @@ use Twig\Error\Error;
  */
 class TemplateCacheWarmer implements CacheWarmerInterface, ServiceSubscriberInterface
 {
-    private $container;
-    private $twig;
+    private ContainerInterface $container;
+    private Environment $twig;
     private iterable $iterator;
 
     public function __construct(ContainerInterface $container, iterable $iterator)
@@ -36,8 +36,6 @@ class TemplateCacheWarmer implements CacheWarmerInterface, ServiceSubscriberInte
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return string[] A list of template files to preload on PHP 7.4+
      */
     public function warmUp(string $cacheDir): array
@@ -53,7 +51,7 @@ class TemplateCacheWarmer implements CacheWarmerInterface, ServiceSubscriberInte
                 if (\is_callable([$template, 'unwrap'])) {
                     $files[] = (new \ReflectionClass($template->unwrap()))->getFileName();
                 }
-            } catch (Error $e) {
+            } catch (Error) {
                 /*
                  * Problem during compilation, give up for this template (e.g. syntax errors).
                  * Failing silently here allows to ignore templates that rely on functions that aren't available in
@@ -68,17 +66,11 @@ class TemplateCacheWarmer implements CacheWarmerInterface, ServiceSubscriberInte
         return $files;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isOptional(): bool
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedServices(): array
     {
         return [

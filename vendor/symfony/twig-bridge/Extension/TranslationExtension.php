@@ -34,8 +34,8 @@ class_exists(TranslatorTrait::class);
  */
 final class TranslationExtension extends AbstractExtension
 {
-    private $translator;
-    private $translationNodeVisitor;
+    private ?TranslatorInterface $translator;
+    private ?TranslationNodeVisitor $translationNodeVisitor;
 
     public function __construct(TranslatorInterface $translator = null, TranslationNodeVisitor $translationNodeVisitor = null)
     {
@@ -58,29 +58,20 @@ final class TranslationExtension extends AbstractExtension
         return $this->translator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('t', [$this, 'createTranslatable']),
+            new TwigFunction('t', $this->createTranslatable(...)),
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters(): array
     {
         return [
-            new TwigFilter('trans', [$this, 'trans']),
+            new TwigFilter('trans', $this->trans(...)),
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTokenParsers(): array
     {
         return [
@@ -92,9 +83,6 @@ final class TranslationExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getNodeVisitors(): array
     {
         return [$this->getTranslationNodeVisitor(), new TranslationDefaultDomainNodeVisitor()];

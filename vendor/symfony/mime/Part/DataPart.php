@@ -13,8 +13,6 @@ namespace Symfony\Component\Mime\Part;
 
 use Symfony\Component\Mime\Exception\InvalidArgumentException;
 use Symfony\Component\Mime\Header\Headers;
-//use Symfony\Component\Mime\Part\TextPart;
-//require "vendor/symfony/mime/Part/TextPart.php";
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>

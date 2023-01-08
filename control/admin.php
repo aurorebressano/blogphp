@@ -1,15 +1,13 @@
 <?php
-namespace Blogphp\Control\Admin;
+namespace App\Control\Admin;
 
 if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
 
-//require_once('../model/Account.php');
+use App\Model\Blogpost;
+use App\Model\Account;
 
-use Blogphp\Model\Blogpost;
-use Blogphp\Model\Account;
-
-var_dump(new Blogpost);
+require_once '../vendor/autoload.php';
 
 if (isset($_GET["email"]) && isset($_GET['mdp']))
 {

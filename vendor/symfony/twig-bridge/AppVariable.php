@@ -25,8 +25,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class AppVariable
 {
-    private $tokenStorage;
-    private $requestStack;
+    private TokenStorageInterface $tokenStorage;
+    private RequestStack $requestStack;
     private string $environment;
     private bool $debug;
 
@@ -100,7 +100,7 @@ class AppVariable
         }
         $request = $this->getRequest();
 
-        return $request && $request->hasSession() ? $request->getSession() : null;
+        return $request?->hasSession() ? $request->getSession() : null;
     }
 
     /**
@@ -139,7 +139,7 @@ class AppVariable
             if (null === $session = $this->getSession()) {
                 return [];
             }
-        } catch (\RuntimeException $e) {
+        } catch (\RuntimeException) {
             return [];
         }
 
@@ -157,5 +157,26 @@ class AppVariable
         }
 
         return $result;
+    }
+
+    public function getCurrent_route(): ?string
+    {
+        if (!isset($this->requestStack)) {
+            throw new \RuntimeException('The "app.current_route" variable is not available.');
+        }
+
+        return $this->getRequest()?->attributes->get('_route');
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getCurrent_route_parameters(): array
+    {
+        if (!isset($this->requestStack)) {
+            throw new \RuntimeException('The "app.current_route_parameters" variable is not available.');
+        }
+
+        return $this->getRequest()?->attributes->get('_route_params') ?? [];
     }
 }

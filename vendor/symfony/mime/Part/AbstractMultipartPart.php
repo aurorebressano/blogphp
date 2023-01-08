@@ -12,7 +12,6 @@
 namespace Symfony\Component\Mime\Part;
 
 use Symfony\Component\Mime\Header\Headers;
-require_once("vendor/symfony/mime/Part/AbstractPart.php");
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>

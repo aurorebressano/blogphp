@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf622acdbacac2b3bf65e3b36a2e44058
+class ComposerStaticInit71e0d264ef355ab6ec6a8d7e68e69457
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -14,7 +14,6 @@ class ComposerStaticInitf622acdbacac2b3bf65e3b36a2e44058
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
-        '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -24,7 +23,6 @@ class ComposerStaticInitf622acdbacac2b3bf65e3b36a2e44058
         ),
         'S' => 
         array (
-            'Symfony\\Polyfill\\Php81\\' => 23,
             'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
@@ -33,6 +31,7 @@ class ComposerStaticInitf622acdbacac2b3bf65e3b36a2e44058
             'Symfony\\Contracts\\Translation\\' => 30,
             'Symfony\\Contracts\\Service\\' => 26,
             'Symfony\\Contracts\\EventDispatcher\\' => 34,
+            'Symfony\\Component\\VarExporter\\' => 30,
             'Symfony\\Component\\VarDumper\\' => 28,
             'Symfony\\Component\\Mime\\' => 23,
             'Symfony\\Component\\Mailer\\' => 25,
@@ -41,6 +40,7 @@ class ComposerStaticInitf622acdbacac2b3bf65e3b36a2e44058
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\ErrorHandler\\' => 31,
+            'Symfony\\Component\\DependencyInjection\\' => 38,
             'Symfony\\Component\\Config\\' => 25,
             'Symfony\\Bundle\\TwigBundle\\' => 26,
             'Symfony\\Bridge\\Twig\\' => 20,
@@ -57,7 +57,12 @@ class ComposerStaticInitf622acdbacac2b3bf65e3b36a2e44058
         ),
         'D' => 
         array (
+            'Doctrine\\Deprecations\\' => 22,
             'Doctrine\\Common\\Lexer\\' => 22,
+        ),
+        'A' => 
+        array (
+            'App\\' => 4,
         ),
     );
 
@@ -65,10 +70,6 @@ class ComposerStaticInitf622acdbacac2b3bf65e3b36a2e44058
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
-        ),
-        'Symfony\\Polyfill\\Php81\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
         ),
         'Symfony\\Polyfill\\Php72\\' => 
         array (
@@ -102,6 +103,10 @@ class ComposerStaticInitf622acdbacac2b3bf65e3b36a2e44058
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher-contracts',
         ),
+        'Symfony\\Component\\VarExporter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/var-exporter',
+        ),
         'Symfony\\Component\\VarDumper\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/var-dumper',
@@ -134,6 +139,10 @@ class ComposerStaticInitf622acdbacac2b3bf65e3b36a2e44058
         array (
             0 => __DIR__ . '/..' . '/symfony/error-handler',
         ),
+        'Symfony\\Component\\DependencyInjection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/dependency-injection',
+        ),
         'Symfony\\Component\\Config\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/config',
@@ -162,24 +171,43 @@ class ComposerStaticInitf622acdbacac2b3bf65e3b36a2e44058
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/src',
         ),
+        'Doctrine\\Deprecations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/deprecations/lib/Doctrine/Deprecations',
+        ),
         'Doctrine\\Common\\Lexer\\' => 
         array (
-            0 => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer',
+            0 => __DIR__ . '/..' . '/doctrine/lexer/src',
         ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/',
+        ),
+        'App\\Model\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/model',
+        ),
+        'App\\Control\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/control',
+        ),
+        'App\\Vendor\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/vendor',
+        )
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
-        'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitf622acdbacac2b3bf65e3b36a2e44058::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitf622acdbacac2b3bf65e3b36a2e44058::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitf622acdbacac2b3bf65e3b36a2e44058::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit71e0d264ef355ab6ec6a8d7e68e69457::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit71e0d264ef355ab6ec6a8d7e68e69457::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit71e0d264ef355ab6ec6a8d7e68e69457::$classMap;
 
         }, null, ClassLoader::class);
     }

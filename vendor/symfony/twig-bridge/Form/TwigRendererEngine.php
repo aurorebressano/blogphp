@@ -21,8 +21,8 @@ use Twig\Template;
  */
 class TwigRendererEngine extends AbstractRendererEngine
 {
-    private $environment;
-    private $template;
+    private Environment $environment;
+    private Template $template;
 
     public function __construct(array $defaultThemes, Environment $environment)
     {
@@ -30,9 +30,6 @@ class TwigRendererEngine extends AbstractRendererEngine
         $this->environment = $environment;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function renderBlock(FormView $view, mixed $resource, string $blockName, array $variables = []): string
     {
         $cacheKey = $view->vars[self::CACHE_KEY_VAR];

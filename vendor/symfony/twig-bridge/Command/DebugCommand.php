@@ -36,7 +36,7 @@ use Twig\Loader\FilesystemLoader;
 #[AsCommand(name: 'debug:twig', description: 'Show a list of twig functions, filters, globals and tests')]
 class DebugCommand extends Command
 {
-    private $twig;
+    private Environment $twig;
     private ?string $projectDir;
     private array $bundlesMetadata;
     private ?string $twigDefaultPath;
@@ -46,7 +46,7 @@ class DebugCommand extends Command
      */
     private array $filesystemLoaders;
 
-    private $fileLinkFormatter;
+    private ?FileLinkFormatter $fileLinkFormatter;
 
     public function __construct(Environment $twig, string $projectDir = null, array $bundlesMetadata = [], string $twigDefaultPath = null, FileLinkFormatter $fileLinkFormatter = null)
     {
@@ -101,16 +101,11 @@ EOF
             throw new InvalidArgumentException(sprintf('Argument "name" not supported, it requires the Twig loader "%s".', FilesystemLoader::class));
         }
 
-        switch ($input->getOption('format')) {
-            case 'text':
-                $name ? $this->displayPathsText($io, $name) : $this->displayGeneralText($io, $filter);
-                break;
-            case 'json':
-                $name ? $this->displayPathsJson($io, $name) : $this->displayGeneralJson($io, $filter);
-                break;
-            default:
-                throw new InvalidArgumentException(sprintf('The format "%s" is not supported.', $input->getOption('format')));
-        }
+        match ($input->getOption('format')) {
+            'text' => $name ? $this->displayPathsText($io, $name) : $this->displayGeneralText($io, $filter),
+            'json' => $name ? $this->displayPathsJson($io, $name) : $this->displayGeneralJson($io, $filter),
+            default => throw new InvalidArgumentException(sprintf('The format "%s" is not supported.', $input->getOption('format'))),
+        };
 
         return 0;
     }
@@ -294,7 +289,7 @@ EOF
             }
 
             foreach ($namespaces as $namespace) {
-                $paths = array_map([$this, 'getRelativePath'], $loader->getPaths($namespace));
+                $paths = array_map($this->getRelativePath(...), $loader->getPaths($namespace));
 
                 if (FilesystemLoader::MAIN_NAMESPACE === $namespace) {
                     $namespace = '(None)';
@@ -384,7 +379,7 @@ EOF
 
         if ('globals' === $type) {
             if (\is_object($meta)) {
-                return ' = object('.\get_class($meta).')';
+                return ' = object('.$meta::class.')';
             }
 
             $description = substr(@json_encode($meta), 0, 50);

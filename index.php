@@ -1,10 +1,17 @@
 <?php
-use Blogphp\Model\Route;
-require_once("model\Router.php");
-//require_once("model\Route.php");
-
+namespace App;
 if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
+
+require_once 'vendor/autoload.php';
+
+use App\Model\Route;
+use App\Model\Router;
+
+var_dump(file_exists('vendor/composer/autoload_real.php'));
+var_dump(file_exists('vendor/autoload.php'));
+
+var_dump($_SERVER['PHP_SELF']);
 
 $route1 = new Route("/index.php", "Bienvenue !", "view/view_index.php");
 $route2 = new Route("/index.php?action=blogposts", "Bienvenue", "control/blogposts.php");
