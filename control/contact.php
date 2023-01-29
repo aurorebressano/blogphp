@@ -10,14 +10,13 @@ $root = $_SERVER['WEB_ROOT'] = str_replace($_SERVER['SCRIPT_NAME'],'',$_SERVER['
 $host = $_SERVER['HTTP_HOST'];
 $protocol=$_SERVER['PROTOCOL'] = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https' : 'http';
 
+$redirectfromcontact = false;
 $page_title = "Contact";
 
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-
-require "view/view_contact.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
@@ -28,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         // Create a Transport object
 
-        $emailSender = strip_tags($_POST['email']);
+        $emailSender = strip_tags(htmlspecialchars($_POST['email']));
         $message = htmlspecialchars($_POST['message']);
         $transport = Transport::fromDsn('smtp://f7bc876e51d7a6:bfde5980ea1da5@smtp.mailtrap.io:2525?encryption=tls&auth_mode=login');
         
@@ -53,6 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         // Send the message
         try {
             $mailer->send($email);
+
+            $message = "Message bien envoyé ! ";
+
         } catch (TransportExceptionInterface $e) {
             echo "Echec d'envoi du message";
         }
@@ -61,8 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 else
 {
     http_response_code(405);
-    echo "Méthode non autorisée";
+    //echo "Méthode non autorisée";
 }
 
+require "view/view_contact.php";
 
 ?>

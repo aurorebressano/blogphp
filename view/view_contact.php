@@ -24,7 +24,19 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <p>Une petite question ?</p>
                         <div class="my-5">
-                        <?php require "view/components/contact_form.php"; ?>
+                        <?php 
+                            if(!isset($message) || empty($message))
+                                require "view/components/contact_form.php"; 
+                            else
+                            {?>
+                            <h5><?= $message; ?></h5>
+                            <form action="index.php" method="get" class="nav justify-content-center mt-0 mb-0">
+                                <button class="btn btn-link nav-item mt-0 mb-0" name="accueil" type="submit">
+                                    <p class="mt-0 mb-0">Retour à la page d'accueil</p>
+                                </button>
+                            </form>
+                        <?php }
+                        ?>
                         </div>
                     </div>
                 </div>

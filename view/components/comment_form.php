@@ -1,5 +1,5 @@
 <!-- Comment form -->
-<form id="contactForm" action="comment.php" method="post">
+<form id="contactForm" action="/index.php?action=comment" method="post">
     <div class="form-floating">
         <input class="form-control" id="name" type="text" placeholder="Nom, prénom..." name="pseudo" required />
         <label for="name">Nom ou pseudonyme:</label>
@@ -15,7 +15,7 @@
         <label for="comment">Commentaire:</label>
         <div class="invalid-feedback" data-sb-feedback="comment:required">A comment is required.</div>
     </div>
-    <input style="display:none" name="idpost" value="<?= $post->id ?>">
+    <input style="display:none" name="idpost" value="<?= $post->getId() ?>">
     <br />
     <!-- Submit Button-->
     <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Envoyer</button>

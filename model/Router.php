@@ -16,6 +16,18 @@ namespace App\Model;
             return $this->registeredRoutes;
         }
 
+        public function setRoute($newRoute)
+        {
+            $routes = $this->getRoutes();
+            $i = 0;
+            foreach($routes as $route)
+            {
+                $i++;
+                if($route->getUrl() == $newRoute->getUrl())
+                    $this->$registeredRoutes[$i] = $route;
+            }
+        }
+
         function redirect($url)
         {
             $verif = false;

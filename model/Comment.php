@@ -5,22 +5,12 @@ use App\Model\Connect;
 
 class Comment 
 {
-    public function __construct(array $arguments = array()) {
-        if (!empty($arguments)) {
-            foreach ($arguments as $property => $argument) {
-                $this->{$property} = $argument;
-            }
-        }
-    }
-
-    public function __call($method, $arguments) {
-        $arguments = array_merge(array("stdObject" => $this), $arguments); // Note: method argument 0 will always referred to the main class ($this).
-        if (isset($this->{$method}) && is_callable($this->{$method})) {
-            return call_user_func_array($this->{$method}, $arguments);
-        } else {
-            throw new Exception("Fatal error: Call to undefined method Blogpost::{$method}()");
-        }
-    }
+    public $id;
+    public $pseudo;
+    public $blogpost;
+    public $date;
+    public $message;
+    public $statut;
 
     // CONNEXION BDD
 
@@ -67,6 +57,10 @@ class Comment
                 array_push($arrComments, $userComment);
             }
         }
+        else
+        {
+            $arrComments = "Aucun commentaire validé pour l'instant";
+        }
         return $arrComments;
     }
 
@@ -76,8 +70,6 @@ class Comment
         $mysqlClient = $mysqlClient->connexion();
 
         $date = date("Y-m-d H:i:s");
-        echo $date;
-        echo $idpost, $pseudo, $email, $message;
         // On récupère tout le contenu de la table 
         $sqlQuery = 'INSERT INTO comment(id_blogpost, pseudo, email, date, message) VALUES(:id_blogpost, :pseudo, :email, :date, :message)';
         $commentStatement = $mysqlClient->prepare($sqlQuery);
