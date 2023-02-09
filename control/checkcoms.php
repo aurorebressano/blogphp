@@ -18,10 +18,10 @@ if(isset($_SESSION['auth']))
     $commentsToCheck = new Comment();
     $commentsToCheck = $commentsToCheck->findComments(null);
 }
-if(sizeof($commentsToCheck) == 0)
+if(gettype($commentsToCheck) == 'array' && sizeof($commentsToCheck) == 0 || gettype($commentsToCheck) == 'string')
 {
     $commentsToCheck = new Comment();
-    $commentsToCheck =  $commentsToCheck = "Aucun commentaire à valider";
+    $commentsToCheck = "Aucun commentaire à valider";
 }
 
 if(isset($_GET['validate']) && $_GET['validate'] != null)

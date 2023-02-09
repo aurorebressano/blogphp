@@ -10,9 +10,11 @@ if(file_exists('../vendor/autoload.php') == true)
 if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
 
-$auth = new Account();
-$auth = $_SESSION['auth'];
-
+if(isset($_SESSION['auth']) && $_SESSION['auth'] != false)
+{
+    $auth = new Account();
+    $auth = $_SESSION['auth'];
+}
 ?>
 
 <!DOCTYPE html>
