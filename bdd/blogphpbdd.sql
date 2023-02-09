@@ -1,3 +1,5 @@
+CREATE database IF NOT EXISTS blogphpdb;
+
 use blogphpdb;
 
 
