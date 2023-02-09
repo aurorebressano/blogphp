@@ -1,3 +1,20 @@
+<?php
+use App\Model\Account;
+
+if(file_exists('vendor/autoload.php') == true)
+    require_once 'vendor/autoload.php';
+    
+if(file_exists('../vendor/autoload.php') == true)
+    require_once '../vendor/autoload.php';
+    
+if (session_status() !== PHP_SESSION_ACTIVE)
+    session_start();
+
+$auth = new Account();
+$auth = $_SESSION['auth'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -37,7 +54,9 @@
         <!-- Post Content-->
         <?php 
             if(isset($_SESSION['auth']) && $_SESSION['auth'] != false)
-            {?>
+            {
+                if($auth->getType() == "Admin") // Récupérer l'objet Account !
+                {?>
                 <div class="container justify-content-center">
                     <!-- Admin nav -->
                     <div class="nav justify-content-center mt-0 mb-0"> 
@@ -55,7 +74,8 @@
                     </div>
                 </div>
                 <hr>
-        <?php }
+        <?php   }
+            }
     if(!isset($_GET["editblogpost"]))
     {?>
         <article class="mb-4">

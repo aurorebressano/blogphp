@@ -1,12 +1,17 @@
 <?php
 namespace App;
-if (session_status() !== PHP_SESSION_ACTIVE)
-    session_start();
-
-require_once 'vendor/autoload.php';
 
 use App\Model\Route;
 use App\Model\Router;
+use App\Model\Account;
+
+if(file_exists('vendor/autoload.php') == true)
+    require_once 'vendor/autoload.php';
+if(file_exists('../vendor/autoload.php') == true)
+    require_once '../vendor/autoload.php';
+
+if (session_status() !== PHP_SESSION_ACTIVE)
+    session_start();
 
 $router = new Router();
 

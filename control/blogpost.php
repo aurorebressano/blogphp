@@ -2,6 +2,7 @@
 namespace App\Control\Blogpost;
 
 use App\Model\Blogpost;
+use App\Model\Account;
 use App\Model\Comment;
 use App\Model\Route;
 use App\Model\Router;
