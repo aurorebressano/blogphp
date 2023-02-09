@@ -19,8 +19,8 @@
                             </blockquote>
                         </div>
                         <form action="checkcoms.php" class="card-footer" method="get">
-                            <button class="btn btn-primary text-uppercase" id="submitButton" type="submit" value="<?= $comment->id ?>" name="validate">Valider</button>
-                            <button class="btn btn-primary text-uppercase" id="submitButton" type="submit" value="<?= $comment->id ?>" name="delete">Supprimer</button>
+                            <button class="btn btn-primary btn-outline-light text-uppercase mb-auto" id="submitButton" type="submit" value="<?= $comment->id ?>" name="validate">Valider</button>
+                            <button class="btn btn-primary btn-outline-light text-uppercase" id="submitButton" type="submit" value="<?= $comment->id ?>" name="delete">Supprimer</button>
                         </form>
                     </div>
             <?php }

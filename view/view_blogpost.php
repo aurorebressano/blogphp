@@ -36,19 +36,23 @@
         ?>
         <!-- Post Content-->
         <?php 
-            if(isset($_SESSION['auth']))
+            if(isset($_SESSION['auth']) && $_SESSION['auth'] != false)
             {?>
                 <div class="container justify-content-center">
                     <!-- Admin nav -->
-                    <form action="../control/blogpost.php" method="get" class="nav justify-content-center mt-0 mb-0">
-                        <input style="display:none" name="id_blogpost" value = "<?= $post->getId() ?>" >
-                        <button class="btn btn-link nav-item mt-0 mb-0" name ="editblogpost" type="submit" value = "<?= $post->getId() ?>">
-                            <p class="mt-0 mb-0">Editer</p>
-                        </button>
-                        <button class="btn btn-link nav-item mt-0 mb-0" name="deleteblogpost" type="submit" value = "<?= $post->getId() ?>">
-                            <p class="mt-0 mb-0">Supprimer</p>
-                        </button>
-                    </form>
+                    <div class="nav justify-content-center mt-0 mb-0"> 
+                        <form action="../control/blogpost.php" method="get">
+                            <input style="display:none" name="id_blogpost" value = "<?= $post->getId() ?>" >
+                            <button class="btn btn-link nav-item mt-0 mb-0" name ="editblogpost" type="submit" value = "<?= $post->getId() ?>">
+                                <p class="mt-0 mb-0">Editer</p>
+                            </button>
+                        </form>
+                        <div>
+                            <button id="del" class="btn btn-link nav-item mt-0 mb-0" name="deleteblogpost" type="submit" value = "<?= $post->getId() ?>" onclick="deleteConfirm()">
+                                <p class="mt-0 mb-0">Supprimer</p>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <hr>
         <?php }
@@ -131,4 +135,20 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
     </body>
+    <script>function deleteConfirm()
+    {
+        var confirmation = window.confirm('Etes-vous sûr de vouloir supprimer ce blogpost ?') ;
+        if(confirmation === true)
+        {
+            //window.alert("ADIEU !");
+            window.location.href = "../control/blogpost.php?id_blogpost=" + <?= (isset($_GET['deleteblogpost']) ? $_GET['deleteblogpost'] : isset($_GET['id_post']))? $_GET['id_post'] : $post->getId() ?> + "&deleteblogpost=" + <?= (isset($_GET['deleteblogpost']) ? $_GET['deleteblogpost'] : isset($_GET['id_post']))? $_GET['id_post'] : $post->getId() ?>;
+        }
+        //if(confirmation === false)
+        //{
+            //window.open("blogpost.php", "Thanks for Visiting!");
+            //window.alert(confirmation);
+            //window.location.href = "index.php?id_blogpost=" + <?= (isset($_GET['deleteblogpost']) ? $_GET['deleteblogpost'] : isset($_GET['id_post']))? $_GET['id_post'] : $post->getId() ?>;
+        //}
+    }
+    </script>
 </html>

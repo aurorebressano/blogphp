@@ -77,7 +77,12 @@ if(isset($_GET["id_blogpost"])
         }
 
         if (gettype($post) == "string")
-            require "../index.php?action=blogposts";
+        {
+            if(file_exists("index.php?action=blogposts") == true)
+                require "index.php?action=blogposts";
+            else
+                require "../index.php?action=blogposts";
+        }
         else
         {
             if(file_exists('view/view_blogpost.php') == true)

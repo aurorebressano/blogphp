@@ -54,7 +54,7 @@ if(!function_exists('AdminOrLogin'))
         if(isset($auth) && $auth != false)
         {
             $path = '../view/admin/panneau-admin.php';
-            $page_title = "Panneau d'administration";
+            $page_title = "Panneau d'admin";
             $header_img = "background-image: url('../view/assets/img/admin.jpg')";
         }
         if($auth == false && isset($_POST["registration"]))

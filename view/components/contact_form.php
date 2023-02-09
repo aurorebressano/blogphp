@@ -20,6 +20,14 @@
         <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
     </div>
     <br />
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <input type="hidden" id="recaptchaResponse" name="recaptcha-response">
+            <!-- <div class="g-recaptcha" data-sitekey="6LfK2VgkAAAAANUqaAcHa58tzURo5vj7yqGON6Uw"></div> -->
+            <div class="g-recaptcha" data-sitekey="6LfwWUgeAAAAABqDzSOXR6voI7V4nVRndb4Tul7a"></div>
+        </div>
+    </div>
+    <br/>
     <!-- Submit Button-->
     <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Envoyer</button>
 </form>

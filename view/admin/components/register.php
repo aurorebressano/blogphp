@@ -20,8 +20,8 @@
                             </blockquote>
                         </div>
                         <form action="checkregistrations.php" class="card-footer" method="post">
-                            <button class="btn btn-primary text-uppercase" id="submitButton" type="submit" value="<?= $reg->getId() ?>" name="validatereg">Valider</button>
-                            <button class="btn btn-primary text-uppercase" id="submitButton" type="submit" value="<?= $reg->getId() ?>" name="deletereg">Supprimer</button>
+                            <button class="btn btn-primary btn-outline-light text-uppercase" id="submitButton" type="submit" value="<?= $reg->getId() ?>" name="validatereg">Valider</button>
+                            <button class="btn btn-primary btn-outline-light text-uppercase" id="submitButton" type="submit" value="<?= $reg->getId() ?>" name="deletereg">Supprimer</button>
                         </form>
                     </div>
             <?php }
@@ -39,33 +39,35 @@
         if($regValidated != null && sizeof($regValidated) > 0)
         {?>
             <h5 class="mt-5">Comptes utilisateurs validés</h5>
-            <table class="table table-striped mt-3">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Rôle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php 
-                $i = 0;
-                foreach($regValidated as $regVal)
-                {
-                    ++$i; ?>
-                    <tr>
-                        <th scope="row"><?= $i ?></th>
-                        <td><?= $regVal->getName() ?></td>
-                        <td><?= $regVal->getFirstName() ?></td>
-                        <td><?= $regVal->getEmail() ?></td>
-                        <td><?= $regVal->getType() ?></td>
-                    </tr>
-          <?php }
-        } ?>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-responsive mt-3">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Rôle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php 
+                    $i = 0;
+                    foreach($regValidated as $regVal)
+                    {
+                        ++$i; ?>
+                        <tr>
+                            <th scope="row"><?= $i ?></th>
+                            <td><?= $regVal->getName() ?></td>
+                            <td><?= $regVal->getFirstName() ?></td>
+                            <td><?= $regVal->getEmail() ?></td>
+                            <td><?= $regVal->getType() ?></td>
+                        </tr>
+            <?php }
+            } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
