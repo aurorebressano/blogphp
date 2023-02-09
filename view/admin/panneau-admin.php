@@ -1,3 +1,19 @@
+<?php
+use App\Model\Account;
+
+if(file_exists('vendor/autoload.php') == true)
+    require_once 'vendor/autoload.php';
+if(file_exists('../vendor/autoload.php') == true)
+    require_once '../vendor/autoload.php';
+
+if (session_status() !== PHP_SESSION_ACTIVE)
+    session_start();
+
+$auth = new Account();
+$auth = $_SESSION['auth'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,15 +36,19 @@
         <div class="container justify-content-center">
             <!-- Admin nav -->
             <form action="admin.php" method="get" class="nav justify-content-center mt-0 mb-0">
-                <button class="btn btn-link nav-item mt-0 mb-0" name ="commentvalid" type="submit">
-                    <p class="mt-0 mb-0">Commentaires à valider</p>
-                </button>
+            <?php if($auth->getType() == "Admin"){?>
                 <button class="btn btn-link nav-item mt-0 mb-0" name="newpost" type="submit">
                     <p class="mt-0 mb-0">Nouveau post</p>
                 </button>
+            <?php }?>
+                <button class="btn btn-link nav-item mt-0 mb-0" name ="commentvalid" type="submit">
+                    <p class="mt-0 mb-0">Commentaires à valider</p>
+                </button>
+            <?php if($auth->getType() == "Admin"){?> 
                 <button class="btn btn-link nav-item mt-0 mb-0" name="register" type="submit">
                     <p class="mt-0 mb-0">Demandes d'inscription</p>
                 </button>
+            <?php }?>
             </form>
         </div>
         <!-- Divider-->
@@ -39,7 +59,7 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="my-5">
                             <!-- Appel du composant à afficher -->
-                            <?php require($pageToDisplay); ?>
+                            <?php require $pageToDisplay; ?>
                         </div>
                     </div>
                 </div>

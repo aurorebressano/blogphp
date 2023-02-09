@@ -1,13 +1,18 @@
 <?php 
-if(session_status() !== PHP_SESSION_ACTIVE)
+
+require_once 'vendor/autoload.php';
+
+use App\Model\Comment;
+
+if (session_status() !== PHP_SESSION_ACTIVE)
     session_start();
 
-if( isset($_POST["pseudo"]) && isset($_POST["email"]) && isset($_POST["comment"]) && isset($_POST["idpost"]))
+if ( isset($_POST["pseudo"]) && isset($_POST["email"]) && isset($_POST["comment"]) && isset($_POST["idpost"]))
 {
-    require_once('../model/model_comments.php');
-    $insert = insertComment($_POST["idpost"], $_POST["pseudo"], $_POST["email"], $_POST["comment"]);
+    $insert = new Comment();
+    $insert->insertComment($_POST["idpost"], htmlspecialchars($_POST["pseudo"]), htmlspecialchars($_POST["email"]), htmlspecialchars($_POST["comment"]));
 }
 
-require("blogpost.php");
+require "blogposts.php";
 
 ?>
