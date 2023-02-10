@@ -1,3 +1,5 @@
+EN version
+
 Installation via the command line:
 
 1- Clone the folder on your machine into the folder of your choice:
@@ -45,6 +47,8 @@ localhost:8085/
     For a better visualization of the roles, see the "roles" file at the root of the folder.
 
 __________________________________________________________________________________________________________
+
+FR version
 
 Installation via la ligne de commande :
 
