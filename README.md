@@ -48,6 +48,14 @@ localhost:8085/
 
     For a better visualization of the roles, see the "roles" file at the root of the folder.
 
+    Admin mode : aurorebressano@gmail.com, password: motDePasseBlog
+    -> After having tested all the functionalities of the admin role, validate the registration request for the "test" account.
+    -> Log out (button at the top right of the site.)
+    -> Log in again with the test account which is moderator:
+        login: test@gmail.com, password: test
+    -> See that the admin panel and features are restricted as desired.
+
+
 __________________________________________________________________________________________________________
 
 FR version
@@ -88,7 +96,7 @@ localhost:8085/
 
     En plus de ces fonctionnalités, celles-ci s'ajoutent:
 
-    b. en mode connecté : modérateur
+    b. en mode connecté :
     -Se connecter à l'espace admin restreint
     -Valider les commentaires postés
 
@@ -99,6 +107,13 @@ localhost:8085/
     -Visualiser la liste des inscrits.
 
     Pour une meilleure visualisation des rôles, voir le fichier "roles" à la racine du dossier.
+
+    Connexion admin: aurorebressano@gmail.com, mdp: motDePasseBlog
+    -> Après avoir testé toutes les fonctionnalités du rôle admin, valider la demande d'inscription du compte "test".
+    -> Se déconnecter (bouton en haut à droite du site.)
+    -> Se connecter à nouveau avec le compte test qui est modérateur: 
+        login: test@gmail.com, mdp: test
+    -> Constater que le panneau admin et les fonctionnalités sont restreintes comme souhaité.
 
 
     
