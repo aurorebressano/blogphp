@@ -1,5 +1,7 @@
 EN version
 
+-> A demo of the app is available online: http://blogphp.graphikartist.fr/
+
 Installation via the command line:
 
 1- Clone the folder on your machine into the folder of your choice:
@@ -50,6 +52,8 @@ ________________________________________________________________________________
 
 FR version
 
+-> Une démo du site est disponible en ligne : http://blogphp.graphikartist.fr/
+
 Installation via la ligne de commande :
 
 1- Cloner le dossier sur votre machine dans le dossier de votre choix:
@@ -95,5 +99,6 @@ localhost:8085/
     -Visualiser la liste des inscrits.
 
     Pour une meilleure visualisation des rôles, voir le fichier "roles" à la racine du dossier.
+
 
     
