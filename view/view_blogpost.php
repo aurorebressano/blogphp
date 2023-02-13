@@ -69,7 +69,8 @@ if(isset($_SESSION['auth']) && $_SESSION['auth'] != false)
                             </button>
                         </form>
                         <div>
-                            <button id="del" class="btn btn-link nav-item mt-0 mb-0" name="deleteblogpost" type="submit" value = "<?= $post->getId() ?>" onclick="deleteConfirm()">
+                            <button id="del" class="btn btn-link nav-item mt-0 mb-0" name="deleteblogpost" type="submit" value = "<?= $post->getId() ?>" 
+                            onclick="<?= "deleteConfirm(" . $post->getId().")"?>">
                                 <p class="mt-0 mb-0">Supprimer</p>
                             </button>
                         </div>
@@ -154,23 +155,5 @@ if(isset($_SESSION['auth']) && $_SESSION['auth'] != false)
         ?>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
     </body>
-    <script>function deleteConfirm()
-    {
-        var confirmation = window.confirm('Etes-vous sûr de vouloir supprimer ce blogpost ?') ;
-        if(confirmation === true)
-        {
-            //window.alert("ADIEU !");
-            window.location.href = "../control/blogpost.php?id_blogpost=" + <?= (isset($_GET['deleteblogpost']) ? $_GET['deleteblogpost'] : isset($_GET['id_post']))? $_GET['id_post'] : $post->getId() ?> + "&deleteblogpost=" + <?= (isset($_GET['deleteblogpost']) ? $_GET['deleteblogpost'] : isset($_GET['id_post']))? $_GET['id_post'] : $post->getId() ?>;
-        }
-        //if(confirmation === false)
-        //{
-            //window.open("blogpost.php", "Thanks for Visiting!");
-            //window.alert(confirmation);
-            //window.location.href = "index.php?id_blogpost=" + <?= (isset($_GET['deleteblogpost']) ? $_GET['deleteblogpost'] : isset($_GET['id_post']))? $_GET['id_post'] : $post->getId() ?>;
-        //}
-    }
-    </script>
 </html>

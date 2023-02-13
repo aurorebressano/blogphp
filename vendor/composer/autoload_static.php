@@ -187,6 +187,10 @@ class ComposerStaticInit71e0d264ef355ab6ec6a8d7e68e69457
         array (
             0 => __DIR__ . '/../..' . '/model',
         ),
+        'App\\Routes\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/routes',
+        ),
         'App\\Control\\' => 
         array (
             0 => __DIR__ . '/../..' . '/control',

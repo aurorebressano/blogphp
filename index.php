@@ -1,8 +1,8 @@
 <?php
 namespace App;
 
-use App\Model\Route;
-use App\Model\Router;
+use App\Routes\Route;
+use App\Routes\Router;
 use App\Model\Account;
 
 if(file_exists('vendor/autoload.php') == true)

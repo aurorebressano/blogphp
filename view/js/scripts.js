@@ -27,3 +27,12 @@ window.addEventListener('DOMContentLoaded', () => {
         scrollPos = currentTop;
     });
 })
+
+function deleteConfirm($id)
+{
+    var confirmation = window.confirm('Etes-vous sûr de vouloir supprimer ce blogpost ?') ;
+    if(confirmation === true)
+    {
+        window.location.href = "../control/blogpost.php?id_blogpost=" + $id + "&deleteblogpost=" + $id;
+    }
+}
