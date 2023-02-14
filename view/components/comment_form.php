@@ -1,5 +1,6 @@
 <!-- Comment form -->
-<form id="contactForm" action="/index.php?action=comment" method="post">
+<!-- <form id="contactForm" action="/index.php?action=comment" method="post"> -->
+<form id="contactForm" action="/index.php" method="post">
     <div class="form-floating">
         <input class="form-control" id="name" type="text" placeholder="Nom, prénom..." name="pseudo" required />
         <label for="name">Nom ou pseudonyme:</label>

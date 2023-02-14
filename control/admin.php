@@ -3,6 +3,8 @@ namespace App\Control\Admin;
 
 use App\Model\Blogpost;
 use App\Model\Account;
+use App\Control\CommentController;
+use App\Control\Guardian;
 
 require_once '../vendor/autoload.php';
 
@@ -47,46 +49,39 @@ if(isset($_SESSION['auth']))
     $auth = $_SESSION['auth'];
 }
 
-if(!function_exists('AdminOrLogin'))
+$adminOrLogin = new Guardian();
+$adminOrLogin = $adminOrLogin->AdminOrLogin($auth);
+
+$path = $adminOrLogin[0];
+$page_title = $adminOrLogin[1];
+$header_img = $adminOrLogin[2];
+$messagePerso = "Bonjour !";
+
+if(isset($_GET["commentvalid"]) || isset($_GET['validate']) || isset($_GET['delete']))
 {
-    function AdminOrLogin($auth)
+    $actionComment = new CommentController();
+    // $pageToDisplay = "admin.php";
+    if(isset($_SESSION['auth']) && isset($_GET["commentvalid"]))
     {
-        if(isset($auth) && $auth != false)
-        {
-            $path = '../view/admin/panneau-admin.php';
-            $page_title = "Panneau d'admin";
-            $header_img = "background-image: url('../view/assets/img/admin.jpg')";
-        }
-        if($auth == false && isset($_POST["registration"]))
-        {
-            $path = '../view/admin/view_registration.php';
-            $page_title = "Demande d'inscription";
-            $header_img = "background-image: url('../view/assets/img/registration.jpg')";
-        }
-        if($auth == false && !isset($_POST["registration"]))
-        {
-            $path = '../view/admin/view_login.php';
-            $page_title = "Connexion";
-            $header_img = "background-image: url('../view/assets/img/unlock.jpg')";
-        }
+        $actionComment->allCommentsToValidate($_SESSION['auth']);
+    }
 
-        $varPages = [$path, $page_title, $header_img];
+    if(isset($_GET['validate']) && $_GET['validate'] != null)
+    {
+        $actionComment->validation($_GET['validate']);
+    }
 
-        return $varPages;
+    if(isset($_GET['delete']) && $_GET['delete'] != null)
+    {
+        $actionComment->deleteCom($_GET['delete']);
     }
 }
 
-$path = AdminOrLogin($auth)[0];
-$page_title = AdminOrLogin($auth)[1];
-$header_img = AdminOrLogin($auth)[2];
-$messagePerso = "Bonjour !";
-
 // Demande d'affichage de gestion admin spécifique
-if (isset($_GET["commentvalid"]) || isset($_GET['validate']) || isset($_GET['delete']))
-    $pageToDisplay = "checkcoms.php";
-
 if (isset($_GET["newpost"]) && $auth->getType() == "Admin")
+{
     $pageToDisplay = "../view/admin/components/new_post_form.php";
+}
 
 if (isset($_GET['register']) || isset($_POST['validatereg']) || isset($_POST['deletereg']) && $auth->getType() == "Admin")
 {
@@ -94,8 +89,9 @@ if (isset($_GET['register']) || isset($_POST['validatereg']) || isset($_POST['de
 }
 
 if (!isset($_GET["commentvalid"]) && !isset($_GET['newpost']) && !isset($_GET['register']))
+{
     $pageToDisplay = "../view/admin/components/accueil_admin.php";
+}
 
 require $path;
-
 ?>
